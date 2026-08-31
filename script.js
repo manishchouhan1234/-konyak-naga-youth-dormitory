@@ -1,30 +1,44 @@
-const englishElements = document.querySelectorAll(".english");
-const hindiElements = document.querySelectorAll(".hindi");
-const languageToggle = document.getElementById("languageToggle");
-
 function setLanguage(language) {
-  const showHindi = language === "hi";
+  const englishElements = document.querySelectorAll(".english");
+  const hindiElements = document.querySelectorAll(".hindi");
 
-  englishElements.forEach((element) => {
-    element.style.display = showHindi ? "none" : "";
-  });
+  if (language === "hi") {
+    englishElements.forEach((element) => {
+      element.style.display = "none";
+    });
 
-  hindiElements.forEach((element) => {
-    element.style.display = showHindi ? "" : "none";
-  });
+    hindiElements.forEach((element) => {
+      element.style.display = "block";
+    });
 
-  document.documentElement.lang = showHindi ? "hi" : "en";
-  localStorage.setItem("konyak-language", language);
+    document.documentElement.lang = "hi";
+    localStorage.setItem("konyak-language", "hi");
+  } else {
+    hindiElements.forEach((element) => {
+      element.style.display = "none";
+    });
+
+    englishElements.forEach((element) => {
+      element.style.display = "block";
+    });
+
+    document.documentElement.lang = "en";
+    localStorage.setItem("konyak-language", "en");
+  }
 }
 
 function changeLanguage(language) {
   setLanguage(language);
 }
 
-languageToggle.addEventListener("click", () => {
-  const current = document.documentElement.lang || "en";
-  setLanguage(current === "en" ? "hi" : "en");
-});
+const languageToggle = document.getElementById("languageToggle");
 
-const savedLanguage = localStorage.getItem("konyak-language");
-setLanguage(savedLanguage === "hi" ? "hi" : "en");
+if (languageToggle) {
+  languageToggle.addEventListener("click", () => {
+    const currentLanguage = document.documentElement.lang || "en";
+    setLanguage(currentLanguage === "en" ? "hi" : "en");
+  });
+}
+
+const savedLanguage = localStorage.getItem("konyak-language") || "en";
+setLanguage(savedLanguage);
