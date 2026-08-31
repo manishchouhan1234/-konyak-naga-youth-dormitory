@@ -1,27 +1,12 @@
 function setLanguage(language) {
-  const englishElements = document.querySelectorAll(".english");
-  const hindiElements = document.querySelectorAll(".hindi");
+  document.body.classList.remove("english-mode", "hindi-mode");
 
   if (language === "hi") {
-    englishElements.forEach((element) => {
-      element.style.display = "none";
-    });
-
-    hindiElements.forEach((element) => {
-      element.style.display = "block";
-    });
-
+    document.body.classList.add("hindi-mode");
     document.documentElement.lang = "hi";
     localStorage.setItem("konyak-language", "hi");
   } else {
-    hindiElements.forEach((element) => {
-      element.style.display = "none";
-    });
-
-    englishElements.forEach((element) => {
-      element.style.display = "block";
-    });
-
+    document.body.classList.add("english-mode");
     document.documentElement.lang = "en";
     localStorage.setItem("konyak-language", "en");
   }
