@@ -686,3 +686,20 @@ footer {
     flex-direction: column;
   }
 }
+/* Language switching */
+
+body.english-mode .english {
+  display: block;
+}
+
+body.english-mode .hindi {
+  display: none;
+}
+
+body.hindi-mode .english {
+  display: none;
+}
+
+body.hindi-mode .hindi {
+  display: block;
+}
