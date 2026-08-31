@@ -1,27 +1,30 @@
-// Language Toggle Function
+const englishElements = document.querySelectorAll(".english");
+const hindiElements = document.querySelectorAll(".hindi");
+const languageToggle = document.getElementById("languageToggle");
 
-function toggleLanguage() {
-    const englishElements = document.querySelectorAll(".english");
-    const hindiElements = document.querySelectorAll(".hindi");
+function setLanguage(language) {
+  const showHindi = language === "hi";
 
-    englishElements.forEach(function(element) {
-        element.style.display = 
-        element.style.display === "none" ? "block" : "none";
-    });
+  englishElements.forEach((element) => {
+    element.style.display = showHindi ? "none" : "";
+  });
 
-    hindiElements.forEach(function(element) {
-        element.style.display = 
-        element.style.display === "none" ? "block" : "none";
-    });
+  hindiElements.forEach((element) => {
+    element.style.display = showHindi ? "" : "none";
+  });
+
+  document.documentElement.lang = showHindi ? "hi" : "en";
+  localStorage.setItem("konyak-language", language);
 }
 
+function changeLanguage(language) {
+  setLanguage(language);
+}
 
-// Image Loading Animation
+languageToggle.addEventListener("click", () => {
+  const current = document.documentElement.lang || "en";
+  setLanguage(current === "en" ? "hi" : "en");
+});
 
-window.onload = function() {
-    const images = document.querySelectorAll("img");
-
-    images.forEach(function(image) {
-        image.style.opacity = "1";
-    });
-};
+const savedLanguage = localStorage.getItem("konyak-language");
+setLanguage(savedLanguage === "hi" ? "hi" : "en");
